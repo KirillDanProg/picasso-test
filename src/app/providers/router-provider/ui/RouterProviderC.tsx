@@ -6,6 +6,6 @@ type Router = ReturnType<typeof createBrowserRouter>;
 type Props = {
   router: Router;
 };
-export const Providers = ({ router }: Props) => {
+export const RouterProviderC = ({ router }: Props) => {
   return <RouterProvider router={router} />;
 };
