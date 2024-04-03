@@ -13,7 +13,7 @@
 
 ## Demo
 
-You can view the live demo of this project hosted on Vercel: [Demo Link](https://vercel.com/kirilldanprog/picasso-test-task)
+You can view the live demo of this project hosted on Vercel: [Demo Link](https://picasso-test-task-mu.vercel.app/)
 
 ## Technologies Used
 
