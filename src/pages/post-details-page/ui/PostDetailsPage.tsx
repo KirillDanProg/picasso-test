@@ -18,13 +18,6 @@ export const PostDetailsPage = () => {
 
   return (
     <>
-      <Button
-        onClick={onGoBackHandler}
-        variant="outlined"
-        sx={{ margin: "20px 0" }}
-      >
-        Назад
-      </Button>
       <Stack
         direction="row"
         justifyContent="center"
@@ -36,10 +29,20 @@ export const PostDetailsPage = () => {
         ) : (
           <Card sx={{ maxWidth: 440 }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {post?.id}
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div">
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                marginBottom="12px"
+              >
+                <Typography variant="h5" component="div">
+                  {post?.id}
+                </Typography>
+                <Button onClick={onGoBackHandler} variant="outlined">
+                  Назад
+                </Button>
+              </Stack>
+              <Typography variant="h6" component="div">
                 {post?.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
