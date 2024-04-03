@@ -17,7 +17,14 @@ const postApi = api.injectEndpoints({
         return { posts: response, totalCount };
       },
     }),
+    getPostById: build.query<PostType, { id: string }>({
+      query: ({ id }) => ({
+        url: `/posts/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useLazyGetPostsQuery } = postApi;
+export const { useGetPostsQuery, useLazyGetPostsQuery, useGetPostByIdQuery } =
+  postApi;
