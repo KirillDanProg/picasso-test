@@ -8,11 +8,12 @@ const LIMIT_PER_PAGE = 10;
 export const PostsPage = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const [fetchPosts, { isLoading }] = useLazyGetPostsQuery();
   const firstMount = useRef(true);
 
   const loadMore = useCallback(async () => {
-    if (isLoading) {
+    if ((!firstMount.current && totalCount <= posts.length) || isLoading) {
       return;
     }
     const { data } = await fetchPosts({
@@ -22,7 +23,7 @@ export const PostsPage = () => {
     if (!data) {
       throw new Error("error");
     }
-
+    setTotalCount(data.totalCount);
     setPosts((prev) => {
       return [...prev, ...data.posts];
     });
