@@ -3,17 +3,21 @@ import type { PostType } from "../..";
 
 const postApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getPosts: build.query<PostType[], { start: number }>({
-      query: ({ start }) => ({
+    getPosts: build.query<
+      { posts: PostType[]; totalCount: number },
+      { _page: number; _limit: number }
+    >({
+      query: (params) => ({
         url: "/posts",
         method: "GET",
-        params: {
-          _limit: 8,
-          _start: start,
-        },
+        params,
       }),
+      transformResponse: (response: PostType[], meta) => {
+        const totalCount = Number(meta?.response?.headers.get("x-total-count"));
+        return { posts: response, totalCount };
+      },
     }),
   }),
 });
 
-export const { useGetPostsQuery } = postApi;
+export const { useGetPostsQuery, useLazyGetPostsQuery } = postApi;
