@@ -13,7 +13,7 @@ type Props = {
 export const Post = ({ post }: Props) => {
   const { id, title, body } = post;
   return (
-    <Card sx={{ maxWidth: "100%" }}>
+    <Card sx={{ maxWidth: "100%", marginBottom: "12px" }}>
       <CardContent
         sx={{
           display: "flex",
