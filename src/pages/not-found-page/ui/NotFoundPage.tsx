@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -8,7 +9,9 @@ export const NotFoundPage = () => {
   return (
     <div>
       <h2>Not found</h2>
-      <button onClick={redirect}>Back to main page</button>
+      <Button variant="outlined" onClick={redirect}>
+        Back to main page
+      </Button>
     </div>
   );
 };
