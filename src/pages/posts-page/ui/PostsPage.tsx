@@ -40,7 +40,7 @@ export const PostsPage = () => {
       useWindowScroll
       data={posts}
       endReached={loadMore}
-      itemContent={(index, post) => {
+      itemContent={(_index, post) => {
         return <Post key={post.id} post={post} />;
       }}
     />

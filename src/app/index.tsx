@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { router } from "./providers/router-provider/router";
 import "./styles/index.scss";
