@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { RoutePath } from "@/shared/config/routes";
 
 type Props = {
   post: PostType;
@@ -13,19 +14,24 @@ type Props = {
 export const Post = ({ post }: Props) => {
   const { id, title, body } = post;
   return (
-    <Card sx={{ maxWidth: "100%", marginBottom: "12px" }}>
+    <Card
+      sx={{
+        maxWidth: "100%",
+        marginBottom: "12px",
+      }}
+    >
       <CardContent
         sx={{
           display: "flex",
-          alignItems: "center",
+          alignItems: "baseline",
           gap: "14px",
           padding: "12px",
         }}
       >
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography color={"primary.dark"} variant="h5" component="div">
           {id}
         </Typography>
-        <Typography sx={{ flexShrink: 0 }} gutterBottom variant="h6">
+        <Typography sx={{ flexShrink: 0 }} variant="h6">
           {title}
         </Typography>
         <Typography
@@ -34,18 +40,17 @@ export const Post = ({ post }: Props) => {
             whiteSpace: "nowrap",
             overflow: "hidden",
           }}
-          variant="body2"
           color="text.secondary"
         >
           {body}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: "center" }}>
         <Button
           component={Link}
-          to={`/posts/${post.id}`}
-          sx={{ flex: 1, textAlign: "center" }}
-          size="small"
+          to={`${RoutePath.POSTS}/${post.id}`}
+          sx={{ width: "min-content" }}
+          size="medium"
           variant="text"
         >
           Просмотр
