@@ -8,7 +8,10 @@ export const MainPage = () => {
     <>
       <CssBaseline />
       <Header />
-      <Container maxWidth="md" style={{ height: "100vh" }}>
+      <Container
+        maxWidth="md"
+        style={{ height: "100vh - 60px", position: "relative" }}
+      >
         <Outlet />
       </Container>
     </>
