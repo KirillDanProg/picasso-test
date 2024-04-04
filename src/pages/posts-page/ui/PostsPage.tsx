@@ -11,7 +11,6 @@ import {
   selectTotalCount,
 } from "../model/selectors/posts-selector";
 import { useScrollPosition } from "@/shared/lib/hooks/use-scroll-position";
-import s from "./PostsPage.module.scss";
 import { Loader } from "@/shared/ui/Loader";
 
 const LIMIT_PER_PAGE = 10;
@@ -60,7 +59,6 @@ export const PostsPage = () => {
         <Loader />
       ) : (
         <Virtuoso
-          className={s.container}
           useWindowScroll
           initialScrollTop={scrollPosition.top}
           data={posts}
