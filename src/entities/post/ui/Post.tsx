@@ -17,7 +17,7 @@ export const Post = ({ post }: Props) => {
     <Card
       sx={{
         maxWidth: "100%",
-        marginBottom: "12px",
+        marginBottom: "24px",
       }}
     >
       <CardContent
@@ -25,7 +25,6 @@ export const Post = ({ post }: Props) => {
           display: "flex",
           alignItems: "baseline",
           gap: "14px",
-          padding: "12px",
         }}
       >
         <Typography color={"primary.dark"} variant="h5" component="div">
