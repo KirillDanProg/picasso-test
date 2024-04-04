@@ -3,7 +3,7 @@ import { Post } from "@/entities/post/ui/Post";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/hooks/redux-hooks";
 import { useRef, useCallback, useEffect } from "react";
 import { Virtuoso } from "react-virtuoso";
-import { postsActions } from "..";
+import { postsActions } from "../model/slice/posts-slice";
 import {
   selectCurrentPage,
   selectPosts,
@@ -11,6 +11,8 @@ import {
   selectTotalCount,
 } from "../model/selectors/posts-selector";
 import { useScrollPosition } from "@/shared/lib/hooks/use-scroll-position";
+import s from "./PostsPage.module.scss";
+import { Loader } from "@/shared/ui/Loader";
 
 const LIMIT_PER_PAGE = 10;
 
@@ -30,12 +32,10 @@ export const PostsPage = () => {
     if ((!firstMount.current && totalCount <= posts.length) || isLoading) {
       return;
     }
-
     if (posts.length && firstMount.current) {
       firstMount.current = false;
       return;
     }
-
     const { data } = await fetchPosts({
       _page: currentPage,
       _limit: LIMIT_PER_PAGE,
@@ -48,21 +48,37 @@ export const PostsPage = () => {
     dispatch(postsActions.setNextPage());
     dispatch(postsActions.setPosts({ newPosts: data.posts }));
     firstMount.current = false;
-  }, [currentPage, isLoading]);
+  }, [currentPage, isLoading, totalCount, posts.length, dispatch, fetchPosts]);
 
   useEffect(() => {
     loadMore();
   }, []);
 
   return (
-    <Virtuoso
-      useWindowScroll
-      initialScrollTop={scrollPosition.top}
-      data={posts}
-      endReached={loadMore}
-      itemContent={(_index, post) => {
-        return <Post key={post.id} post={post} />;
-      }}
-    />
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Virtuoso
+          className={s.container}
+          useWindowScroll
+          initialScrollTop={scrollPosition.top}
+          data={posts}
+          endReached={loadMore}
+          itemContent={(_index, post) => {
+            return <Post key={post.id} post={post} />;
+          }}
+          context={{ endOfList: totalCount <= posts.length }}
+          components={{ Footer }}
+        />
+      )}
+    </>
   );
+};
+
+type Props = {
+  context?: { endOfList: boolean };
+};
+const Footer = ({ context }: Props) => {
+  return <>{!context?.endOfList && <Loader />}</>;
 };
