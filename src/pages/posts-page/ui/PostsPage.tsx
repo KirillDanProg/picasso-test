@@ -60,7 +60,7 @@ export const PostsPage = () => {
       ) : (
         <Virtuoso
           useWindowScroll
-          initialScrollTop={scrollPosition.top}
+          initialScrollTop={scrollPosition.top - 60}
           data={posts}
           endReached={loadMore}
           itemContent={(_index, post) => {
